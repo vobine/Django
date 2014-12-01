@@ -61,6 +61,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'foodLog',
         'PASSWORD': '{spigot:hate/zimple',
+        'HOST': '/var/lib/mysql/mysql.sock',
+        'NAME': 'django20141018',
     },
 }
 
