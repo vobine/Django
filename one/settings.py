@@ -56,14 +56,21 @@ WSGI_APPLICATION = 'one.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
+DATABASE_SWITCH = {
+    'AWS': {
         'ENGINE': 'django.db.backends.mysql',
         'USER': 'foodLog',
         'PASSWORD': '{spigot:hate/zimple',
         'HOST': '/var/lib/mysql/mysql.sock',
         'NAME': 'django20141018',
     },
+    'laptop': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'debug-db',
+    },
+}
+DATABASES = {
+    'default': DATABASE_SWITCH['laptop'],
 }
 
 # Internationalization
