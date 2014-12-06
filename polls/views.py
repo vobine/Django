@@ -1,13 +1,15 @@
 from django.http import HttpResponse
+from django.template import RequestContext, loader
 from polls.models import Question
 
 # Create your views here.
 def index (request):
     """Home page!"""
     qList = Question.objects.order_by ('-pub_date')[:5]
-    output = "Hello, world, you are at the polls.\n"
-    output += ', '.join ([p.question_text for p in qList])
-    return HttpResponse (output)
+    template = loader.get_template ("polls/index.html")
+    context = RequestContext (request,
+                              {'qList': qList,} )
+    return HttpResponse (template.render (context))
 
 def detail (request, question_id):
     return HttpResponse (

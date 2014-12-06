@@ -1,0 +1,9 @@
+{% if qList %}
+    <ul>
+    {% for question in qList %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
