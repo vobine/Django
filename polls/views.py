@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from polls.models import Question
 
@@ -10,9 +10,14 @@ def index (request):
     return render (request, "polls/index.html", context)
 
 def detail (request, question_id):
-    return HttpResponse (
-        "You are looking at question {0:s}.".format (
-            question_id))
+    """Show one question in detail."""
+    try:
+        question = Question.objects.get (pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404
+    return render (request,
+                   'polls/detail.html',
+                   {'question': question, } )
 
 def results (request, question_id):
     return HttpResponse (
