@@ -2,7 +2,10 @@ from django.contrib import admin
 
 # Register your models here.
 from polls.models import Question, Choice
-admin.site.register (Choice)
+
+class ChoiceInline (admin.StackedInline):
+    model = Choice
+    extra = 3
 
 class QuestionAdmin (admin.ModelAdmin):
     fieldsets = (
@@ -11,5 +14,6 @@ class QuestionAdmin (admin.ModelAdmin):
                               'classes': ('collapse', ), }
      ),
     )
+    inlines = (ChoiceInline, )
 
 admin.site.register (Question, QuestionAdmin)
